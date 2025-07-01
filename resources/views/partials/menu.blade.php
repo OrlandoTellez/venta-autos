@@ -6,24 +6,26 @@
     </a>
     </h1>
     <nav class="nav">
-        <a href="/">Dashboard</s>
-        <a href="/clientes">Clientes</a>
-        <a href="/coches">Coches</a>
-        <a href="/compras">Compras</a>
-        <a href="/revisiones">Revisiones</a>
-        <a href="/agencias">Agencias</a>
-        <a href="/proveedores">Proveedores</a>
+        <a href="{{ route('home') }}">Dashboard</a>
+        <a href="{{ route('clientes.index') }}">Clientes</a>
+        <a href="{{ route('coches.index') }}">Coches</a>
+        <a href="{{ route('compras.index') }}">Compras</a>
+        <a href="{{ route('revisiones.index') }}">Revisiones</a>
+        <a href="{{ route('agencias.index') }}">Agencias</a>
+        <a href="{{ route('proveedores.index') }}">Proveedores</a>
     </nav>
 </header>
 
 <style>
     .header {
-    padding: 20px;
-    position: fixed;
-    width: 20%; 
-    height: 100vh;
-    background: #0f172a;
-}
+        grid-row: span 5 / span 5;
+        padding: 20px;
+        position: fixed;
+        width: 20%; 
+        height: 100vh;
+        background: #0f172a;    
+    }
+    
 
 .nav{
     display: flex;
