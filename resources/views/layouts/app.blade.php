@@ -15,6 +15,7 @@
         }
 
         body {
+            width: 100%;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(5, 1fr);
@@ -30,7 +31,7 @@
         .div2 {
             grid-column: span 4 / span 4;
             grid-row: span 5 / span 5;
-            margin-left: 264px;
+            margin-left: 25%;
             width: 100%;
         }
         
