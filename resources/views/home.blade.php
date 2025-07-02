@@ -7,34 +7,45 @@
         <h2>Dashboard</h2>
         <p>Resumen general del sistema.</p>
 
+        @php
+            $tarjetas = [
+               [
+                    'titulo' => 'Total clientes',
+                    'valor' => 1234,
+                    'porcentaje' => 11,
+                    'icono' => 'users'
+                ],
+                [
+                    'titulo' => 'Coches en stock',
+                    'valor' => 89,
+                    'porcentaje' => 8,
+                    'icono' => 'car'
+                ],
+                [
+                    'titulo' => 'Ventas este mes',
+                    'valor' => 23,
+                    'porcentaje' => 15,
+                    'icono' => 'shopping-cart'
+                ],
+                [
+                    'titulo' => 'Revisiones pendientes',
+                    'valor' => 15,
+                    'porcentaje' => 5,
+                    'icono' => 'wrench'
+                ] 
+            ]
+        @endphp
+
         <div class="cards">
-            <x-tarjeta-resumen 
-            titulo="Total cliente"
-            valor="1234"
-            porcentaje="11"
-            icono="aa"
-            />
-
-            <x-tarjeta-resumen 
-            titulo="Coches en stock"
-            valor="89"
-            porcentaje="11"
-            icono="aa"
-            />
-
-            <x-tarjeta-resumen 
-            titulo="Ventas este mes"
-            valor="23"
-            porcentaje="11"
-            icono="aa"
-            />
-
-            <x-tarjeta-resumen 
-            titulo="Revisiones pendientes"
-            valor="15"
-            porcentaje="11"
-            icono="aa"
-            />
+           @foreach ($tarjetas as $tarjeta)
+                <x-tarjeta-resumen 
+                :titulo="$tarjeta['titulo']"
+                :valor="$tarjeta['valor']"
+                :porcentaje="$tarjeta['porcentaje']"
+                :icono="$tarjeta['icono']"
+                /> 
+           @endforeach
+            
         </div>
         
     </section>
