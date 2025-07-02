@@ -30,20 +30,19 @@
         .div2 {
             grid-column: span 4 / span 4;
             grid-row: span 5 / span 5;
-            padding: 20px;
-            margin-left: 270px;
+            margin-left: 264px;
+            width: 100%;
         }
         
 
     </style>
 </head>
 <body>
-
     @include('partials.menu') 
-
+    
     <main class="div2">
+        @include('partials.header')
         @yield('content')
     </main>
-
 </body>
 </html>

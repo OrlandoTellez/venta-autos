@@ -3,5 +3,13 @@
 @section('title', 'Coches')
 
 @section('content')
-    <h2>Gestión de coches</h2>
+    <section>
+        <h2>Gestión de coches</h2>
+    </section>
 @endsection
+
+<style>
+    section{
+        padding: 20px;
+    }
+</style>
