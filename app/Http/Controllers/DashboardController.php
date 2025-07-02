@@ -3,9 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
-
-class ClienteController extends Controller
+class DashboardController extends Controller
 {
     public function index()
     {
@@ -19,7 +17,7 @@ class ClienteController extends Controller
                 'picture' => ['thumbnail' => 'https://randomuser.me/api/portraits/thumb/men/1.jpg'],
             ],
         ];
-        return view('pages.clientes.index', [
+        return view('pages.dashboard.index', [
             'users' => $usuarios,
             'colors' => true
         ]);

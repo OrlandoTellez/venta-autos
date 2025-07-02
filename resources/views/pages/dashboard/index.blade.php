@@ -45,7 +45,31 @@
                 :icono="$tarjeta['icono']"
                 /> 
            @endforeach
-            
+        </div>
+
+        <div class="tablaCliente"> 
+            @foreach ($users as $index => $user)
+                @php
+                    $backgroundColor = $index % 2 === 0 ? '#333' : '#000';
+                    $showColor = $colors ? $backgroundColor : 'transparent';
+                @endphp
+                <tr style="background-color: {{ $showColor }}; color: white;">
+                    <td><img src="{{ $user['picture']['thumbnail'] }}" alt="foto" /></td>
+                    <td>{{ $user['name']['first'] }}</td>
+                    <td>{{ $user['name']['last'] }}</td>
+                    <td>{{ $user['email'] }}</td>
+                    <td>{{ $user['phone'] }}</td>
+                    <td>{{ $user['location']['country'] }}</td>
+                    <td>{{ $user['dob']['age'] }}</td>
+                    <td>
+                        <form action="{{ route('user.delete', ['email' => $user['email']]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
         </div>
         
     </section>
@@ -61,5 +85,9 @@
         gap: 18px;
         width: 100%;
         padding: 20px 0;
+    }
+
+    .tablaCliente{
+        width: 100%;
     }
 </style>

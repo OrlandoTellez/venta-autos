@@ -6,7 +6,7 @@
     </a>
     </h1>
     <nav class="nav">
-        <a href="{{ route('home') }}">Dashboard</a>
+        <a href="{{ route('pages.dashboard.index') }}">Dashboard</a>
         <a href="{{ route('clientes.index') }}">Clientes</a>
         <a href="{{ route('coches.index') }}">Coches</a>
         <a href="{{ route('compras.index') }}">Compras</a>
