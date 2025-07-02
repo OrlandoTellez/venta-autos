@@ -39,10 +39,10 @@
     </style>
 </head>
 <body>
-    @include('partials.menu') 
+    <x-menu />
     
     <main class="div2">
-        @include('partials.header')
+        <x-header />
         @yield('content')
     </main>
 </body>
