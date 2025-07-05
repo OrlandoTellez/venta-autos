@@ -17,6 +17,8 @@ Route::resource('clientes', ClienteController::class);
 Route::delete('/clientes/delete/{nombre}', [ClienteController::class, 'destroy'])->name('user.delete');
 
 Route::resource('coches', CocheController::class);
+Route::delete('/coches/delete/{matricula}', [CocheController::class, 'destroy'])->name('coches.delete');
+
 Route::resource('compras', ComprasController::class);
 Route::resource('revisiones', RevisionesController::class);
 Route::resource('agencias', AgenciasController::class);
