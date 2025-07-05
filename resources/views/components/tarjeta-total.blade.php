@@ -1,6 +1,8 @@
+@props(['titulo', 'valor', 'icono'])
+
 <div class="card">
     <div>
-        <img src={{$icono}} alt="icon" />
+        <x-icon :nombreIcono="$icono"/>
     </div>
     <div>
         <p>{{$titulo}}</p>

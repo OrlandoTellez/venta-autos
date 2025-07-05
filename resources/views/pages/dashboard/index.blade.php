@@ -13,25 +13,25 @@
                     'titulo' => 'Total clientes',
                     'valor' => 1234,
                     'porcentaje' => 11,
-                    'icono' => 'users'
+                    'icono' => 'clientes'
                 ],
                 [
                     'titulo' => 'Coches en stock',
                     'valor' => 89,
                     'porcentaje' => 8,
-                    'icono' => 'car'
+                    'icono' => 'coches'
                 ],
                 [
                     'titulo' => 'Ventas este mes',
                     'valor' => 23,
                     'porcentaje' => 15,
-                    'icono' => 'shopping-cart'
+                    'icono' => 'carritoCompra'
                 ],
                 [
                     'titulo' => 'Revisiones pendientes',
                     'valor' => 15,
                     'porcentaje' => 5,
-                    'icono' => 'wrench'
+                    'icono' => 'calendario'
                 ] 
             ]
         @endphp

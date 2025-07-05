@@ -1,10 +1,12 @@
+@props(['titulo', 'valor', 'porcentaje', 'icono'])
+
 <div class="card">
     <div>
         <p>{{$titulo}}</p>
         <h2>{{$valor}}</h2>
         <p><span>{{$porcentaje}}</span> vs last month</p>
     </div>
-    <img src={{$icono}} alt="icon" />
+    <x-icon :nombreIcono="$icono" />
 </div>
 
 <style>

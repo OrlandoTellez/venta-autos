@@ -16,20 +16,20 @@
                 <x-tarjeta-total 
                     titulo="Total de clientes"
                     valor="{{ count($users) }}"
-                    icono="users"
+                    icono="clientes"
                 />
-    
+
                 <x-tarjeta-total 
                     titulo="Total de clientes"
                     valor="{{ count($users) }}"
-                    icono="users"
+                    icono="clientes"
                 />
-    
                 <x-tarjeta-total 
                     titulo="Total de clientes"
                     valor="{{ count($users) }}"
-                    icono="users"
+                    icono="clientes"
                 />
+    
             </div>
         </article>
 
@@ -40,7 +40,7 @@
                 placeholder="Buscar cliente por nombre, ciudad o telefono"
                 >
             </form>
-            <table border="1" cellpadding="6" cellspacing="0">
+            <table border="0" cellpadding="6" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -92,7 +92,16 @@
     table{
         width: 100%;
         background-color: white;
+        border: 1px solid #cbd5e1;
+        border-radius: 5px;
+    }
 
+    th{
+        padding: 10px;
+    }
+    
+    tr{
+        text-align: center;
     }
 
     td{
@@ -120,6 +129,7 @@
             width: 100%;
             padding: 5px;
             border-radius: 5px;
+            border: 1px solid #cbd5e1;
         }
     }
 </style>
