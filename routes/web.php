@@ -13,10 +13,8 @@ use App\Http\Controllers\ProveedoresController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('pages.dashboard.index');
 
-Route::delete('/users/delete/{email}', [DashboardController::class, 'destroy'])->name('user.delete');
-
 Route::resource('clientes', ClienteController::class);
-Route::delete('/users/delete/{email}', [ClienteController::class, 'destroy'])->name('user.delete');
+Route::delete('/clientes/delete/{nombre}', [ClienteController::class, 'destroy'])->name('user.delete');
 
 Route::resource('coches', CocheController::class);
 Route::resource('compras', ComprasController::class);
