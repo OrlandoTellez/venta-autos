@@ -51,13 +51,14 @@
 
 <style>
     section{
+        width: 100%;
         padding: 20px;
     }
 
     .cards{
-        display: flex;
-        gap: 18px;
-        width: 100%;
-        padding: 20px 0;
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 </style>

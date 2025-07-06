@@ -45,44 +45,46 @@
                 placeholder="Buscar coches por matricula, marca o modelo"
                 >
             </form>
-            <table border="0" cellpadding="6" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Matricula</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Color</th>
-                        <th>Precio C$</th>
-                        <th>Cliente</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($coches as $index => $coches)
-                        @php
-                            $backgroundColor = $index % 2 === 0 ? '#F5F5F5' : '#fff';
-                            $showColor = $colors ? $backgroundColor : 'transparent';
-                        @endphp
-                        <tr style="background-color: {{ $showColor }}; color: black;">
-                            <td>{{ $coches['matricula'] }}</td>
-                            <td>{{ $coches['marca'] }}</td>
-                            <td>{{ $coches['modelo'] }}</td>
-                            <td>{{ $coches['color'] }}</td>
-                            <td>{{ $coches['precio'] }}</td>
-                            <td>{{ $coches['estado'] }}</td>
-                            <td>{{ $coches['precio'] }}</td>
-                            <td>
-                                <form action="{{ route('coches.delete', ['matricula' => $coches['matricula']]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Borrar</button>
-                                </form>
-                            </td>
+            <div>
+                <table border="0" cellpadding="6" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Color</th>
+                            <th>Precio C$</th>
+                            <th>Cliente</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($coches as $index => $coches)
+                            @php
+                                $backgroundColor = $index % 2 === 0 ? '#F5F5F5' : '#fff';
+                                $showColor = $colors ? $backgroundColor : 'transparent';
+                            @endphp
+                            <tr style="background-color: {{ $showColor }}; color: black;">
+                                <td>{{ $coches['matricula'] }}</td>
+                                <td>{{ $coches['marca'] }}</td>
+                                <td>{{ $coches['modelo'] }}</td>
+                                <td>{{ $coches['color'] }}</td>
+                                <td>{{ $coches['precio'] }}</td>
+                                <td>{{ $coches['estado'] }}</td>
+                                <td>{{ $coches['precio'] }}</td>
+                                <td>
+                                    <form action="{{ route('coches.delete', ['matricula' => $coches['matricula']]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Borrar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </article>
 
         
@@ -91,6 +93,7 @@
 
 <style>
     section{
+        width: 100%;
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -117,9 +120,10 @@
     }
 
     .cards{
-        display: flex;
+        display: grid;
         gap: 10px;
         padding: 0;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 
     .tabla{
@@ -127,6 +131,10 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tabla div{
+        overflow-x: scroll;
     }
 
     .tabla form{

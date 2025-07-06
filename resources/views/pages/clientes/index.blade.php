@@ -40,40 +40,42 @@
                 placeholder="Buscar cliente por nombre, ciudad o telefono"
                 >
             </form>
-            <table border="0" cellpadding="6" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Dirección</th>
-                        <th>Ciudad</th>
-                        <th>Teléfono</th>
-                        <th>Fecha de registro</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($users as $index => $user)
-                        @php
-                            $backgroundColor = $index % 2 === 0 ? '#F5F5F5' : '#fff';
-                            $showColor = $colors ? $backgroundColor : 'transparent';
-                        @endphp
-                        <tr style="background-color: {{ $showColor }}; color: black;">
-                            <td>{{ $user['nombre']['primerNombre'] }}</td>
-                            <td>{{ $user['direccion'] }}</td>
-                            <td>{{ $user['ciudad'] }}</td>
-                            <td>{{ $user['telefono'] }}</td>
-                            <td>{{ $user['fecha_de_registro'] }}</td>
-                            <td>
-                                <form action="{{ route('user.delete', ['nombre' => $user['nombre']['primerNombre']]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Borrar</button>
-                                </form>
-                            </td>
+            <div>
+                <table border="0" cellpadding="6" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Dirección</th>
+                            <th>Ciudad</th>
+                            <th>Teléfono</th>
+                            <th>Fecha de registro</th>
+                            <th>Acción</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $index => $user)
+                            @php
+                                $backgroundColor = $index % 2 === 0 ? '#F5F5F5' : '#fff';
+                                $showColor = $colors ? $backgroundColor : 'transparent';
+                            @endphp
+                            <tr style="background-color: {{ $showColor }}; color: black;">
+                                <td>{{ $user['nombre']['primerNombre'] }}</td>
+                                <td>{{ $user['direccion'] }}</td>
+                                <td>{{ $user['ciudad'] }}</td>
+                                <td>{{ $user['telefono'] }}</td>
+                                <td>{{ $user['fecha_de_registro'] }}</td>
+                                <td>
+                                    <form action="{{ route('user.delete', ['nombre' => $user['nombre']['primerNombre']]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Borrar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </article>
 
         
@@ -83,6 +85,7 @@
 
 <style>
     section{
+        width: 100%;
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -109,9 +112,10 @@
     }
 
     .cards{
-        display: flex;
+        display: grid;
         gap: 10px;
         padding: 0;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 
     .tabla{
@@ -119,6 +123,10 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tabla div{
+        overflow-x: scroll;
     }
 
     .tabla form{

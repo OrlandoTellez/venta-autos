@@ -4,46 +4,85 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'Mi sitio')</title>
     <style>
-        *{
+       * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
 
-        html{
+        html {
             font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
         }
 
         body {
             width: 100%;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(5, 1fr);
             gap: 8px;
             background: #f9fafb;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
         }
 
-        a{
+        a {
             text-decoration: none;
             color: white;
         }
 
         .div2 {
-            grid-column: span 4 / span 4;
-            grid-row: span 5 / span 5;
-            margin-left: 25%;
-            width: 100%;
+            background: #f0f0f0;
+            border-radius: 8px;
+            height: 100vh;
         }
         
+
+        .menu-toggle {
+            display: block; /* Visible en móvil */
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 2rem;
+            z-index: 999;
+            background: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* 💻 Escritorio */
+        @media only screen and (min-width: 1024px) {
+            body {
+            }
+
+            .menu-toggle {
+                display: none; 
+            }
+
+            .div2{
+                margin-left: 20%;
+            }
+
+            body.menu-open .parent {
+                filter: blur(2px);
+            }
+        }
 
     </style>
 </head>
 <body>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    
     <x-menu />
     
     <main class="div2">
         <x-header />
         @yield('content')
     </main>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('sidebar');
+            menu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        }
+    </script>
 </body>
 </html>
