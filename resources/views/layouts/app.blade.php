@@ -37,7 +37,7 @@
         
 
         .menu-toggle {
-            display: block; /* Visible en móvil */
+            display: block; 
             position: fixed;
             top: 10px;
             left: 10px;
@@ -48,7 +48,10 @@
             cursor: pointer;
         }
 
-        /* 💻 Escritorio */
+        button{
+            cursor: pointer;
+        }
+
         @media only screen and (min-width: 1024px) {
             body {
             }
@@ -67,6 +70,8 @@
         }
 
     </style>
+
+    @stack('scripts')
 </head>
 <body>
 
