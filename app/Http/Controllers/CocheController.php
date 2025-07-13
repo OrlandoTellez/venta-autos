@@ -1,42 +1,42 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Coche;
 use Illuminate\Http\Request;
 
 class CocheController extends Controller
 {
     public function index()
     {
-        $coches = [
-             [
-                'matricula' => 'ABC-123',
-                'marca' => 'Toyota',
-                'modelo' => 'Corolla',
-                'color' => 'Rojo',
-                'precio' => 15000,
-                'cliente' => 'Juan Pérez',
-                'estado' => 'Disponible'
-            ],
-            [
-                'matricula' => 'XYZ-456',
-                'marca' => 'Honda',
-                'modelo' => 'Civic',
-                'color' => 'Azul',
-                'precio' => 18000,
-                'cliente' => 'Ana Gómez',
-                'estado' => 'Vendido'
-            ],
-            
-        ];
+        $coches = Coche::latest()->paginate(15);
+
         return view('pages.coches.index', [
             'coches' => $coches,
-            'colors' => true
+            'colors' => true,
         ]);
     }
 
-    public function destroy(string $matricula)
+    public function store(Request $request)
     {
-        // Aquí haces la lógica de borrar usuario con ese email (si es base de datos, etc.)
-        return redirect()->back()->with('message', "coche con matricula ${matricula} eliminado.");
+        $validated = $request->validate([
+            'matricula' => ['required', 'string', 'max:150'],
+            'marca' => ['required', 'string', 'max:255'],
+            'modelo' => ['required', 'string', 'max:100'],
+            'color' => ['required', 'string', 'max:20'],
+            'precio' => ['required', 'string', 'max:20'],
+        ]);
+
+        $coche = Coche::create($validated);
+
+        return response()->json([
+            'message' => 'coche registrado con éxito',
+            'coche' => $coche
+        ], 201);
+    }
+
+    public function destroy(Coche $coche)
+    {
+        $coche->delete();
+        return back()->with('success', 'Coche eliminado');
     }
 }

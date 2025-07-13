@@ -18,11 +18,12 @@ Route::get('/', [DashboardController::class, 'index'])->name('pages.dashboard.in
 
 Route::resource('clientes', ClienteController::class);
 route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
-
 Route::delete('/clientes/{cliente}', [ClienteController::class, 'destroy'])->name('user.delete');
 
 Route::resource('coches', CocheController::class);
-Route::delete('/coches/delete/{matricula}', [CocheController::class, 'destroy'])->name('coches.delete');
+Route::post('/coches', [CocheController::class, 'store'])->name('coches.store');
+Route::delete('/coches/{coche}', [CocheController::class, 'destroy'])->name('coche.delete');
+
 
 Route::resource('compras', ComprasController::class);
 Route::resource('revisiones', RevisionesController::class);
