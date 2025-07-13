@@ -55,8 +55,8 @@
                                 <td>{{ $coche->modelo }}</td>
                                 <td>{{ $coche->color }}</td>
                                 <td>{{ $coche->precio }}</td>
+                                <td>{{ $coche->cliente }}</td>
                                 <td>{{ $coche->estado }}</td>
-                                <td>{{ $coche->precio }}</td>
                                 <td>
                                     <form 
                                     action="{{ route('coche.delete', ['coche' => $coche->id]) }}"

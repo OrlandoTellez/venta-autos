@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CocheController;
-use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\RevisionesController;
 use App\Http\Controllers\AgenciasController;
 use App\Http\Controllers\ProveedoresController;
@@ -25,7 +25,12 @@ Route::post('/coches', [CocheController::class, 'store'])->name('coches.store');
 Route::delete('/coches/{coche}', [CocheController::class, 'destroy'])->name('coche.delete');
 
 
-Route::resource('compras', ComprasController::class);
+Route::resource('compras', CompraController::class);
+Route::post('/compras', [CompraController::class, 'store'])->name('compras.store');
+Route::delete('/compras/{compra}', [CompraController::class, 'destroy'])->name('compra.delete');
+
+
+
 Route::resource('revisiones', RevisionesController::class);
 Route::resource('agencias', AgenciasController::class);
 Route::resource('proveedores', ProveedoresController::class);

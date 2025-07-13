@@ -9,6 +9,11 @@ class Coche extends Model
 {
     use HasFactory;
 
+      public function compras()
+    {
+        return $this->hasMany(Compra::class);
+    }
+
     /** 
      * Nombre de la tabla (opcional; Laravel lo deduce como ‘clientes’).
      * Descomenta si tu tabla se llama distinto.
