@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Mi sitio')</title>
     <style>
-       * {
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
@@ -34,10 +35,10 @@
             border-radius: 8px;
             height: 100vh;
         }
-        
+
 
         .menu-toggle {
-            display: block; 
+            display: block;
             position: fixed;
             top: 10px;
             left: 10px;
@@ -48,19 +49,18 @@
             cursor: pointer;
         }
 
-        button{
+        button {
             cursor: pointer;
         }
 
         @media only screen and (min-width: 1024px) {
-            body {
-            }
+            body {}
 
             .menu-toggle {
-                display: none; 
+                display: none;
             }
 
-            .div2{
+            .div2 {
                 margin-left: 20%;
             }
 
@@ -68,17 +68,17 @@
                 filter: blur(2px);
             }
         }
-
     </style>
 
     @stack('scripts')
 </head>
+
 <body>
 
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    
+
     <x-menu />
-    
+
     <main class="div2">
         <x-header />
         @yield('content')
@@ -92,4 +92,5 @@
         }
     </script>
 </body>
+
 </html>

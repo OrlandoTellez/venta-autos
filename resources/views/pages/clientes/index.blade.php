@@ -40,24 +40,25 @@
                             <th>Acción</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="clientes-body">
                         @foreach ($users as $index => $user)
                             @php
                                 $backgroundColor = $index % 2 === 0 ? '#F5F5F5' : '#fff';
                                 $showColor = $colors ? $backgroundColor : 'transparent';
                             @endphp
                             <tr style="background-color: {{ $showColor }}; color: black;">
-                                <td>{{ $user['nombre']['primerNombre'] }}</td>
-                                <td>{{ $user['direccion'] }}</td>
-                                <td>{{ $user['ciudad'] }}</td>
-                                <td>{{ $user['telefono'] }}</td>
-                                <td>{{ $user['fecha_de_registro'] }}</td>
+                                <td>{{ $user->nombre }}</td>
+                                <td>{{ $user->direccion }}</td>
+                                <td>{{ $user->ciudad }}</td>
+                                <td>{{ $user->telefono }}</td>
+                                <td>{{ $user->created_at->format('Y-m-d') }}</td>
                                 <td>
-                                    <form action="{{ route('user.delete', ['nombre' => $user['nombre']['primerNombre']]) }}"
-                                        method="POST">
+                                    <form action="{{ route('user.delete', ['cliente' => $user->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit">Borrar</button>
+                                        <div>
+                                            <button type="submit">Borrar</button>
+                                        </div>
                                     </form>
                                 </td>
                             </tr>
@@ -68,16 +69,15 @@
         </article>
 
         <template id="perfil-modal-template">
-            <!-- Cubre toda la pantalla -->
             <div class="modal-overlay">
-                <!-- Caja blanca centrada -->
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 class="modal-title">Registrar cliente</h2>
                         <span class="btn-cerrar" aria-label="Cerrar">×</span>
                     </div>
 
-                    <form class="register-form">
+                    <form class="register-form" action="{{ route('clientes.store') }}" method="POST">
+                        @csrf
                         <label>
                             Nombre completo
                             <input name="nombre" type="text" placeholder="Ingrese nombre del empleado" required>
@@ -109,24 +109,20 @@
             <script>
                 document.addEventListener('DOMContentLoaded', () => {
                     const $btnOpen = document.querySelector('.btn-registrarCliente');
-                    if (!$btnOpen) return;   // por si la clase aún no existe
+                    if (!$btnOpen) return;
 
                     const $tpl = document.getElementById('perfil-modal-template');
 
                     $btnOpen.addEventListener('click', () => {
-                        // Clonamos la plantilla
                         const fragment = $tpl.content.cloneNode(true);
                         document.body.appendChild(fragment);
 
-                        // Fade‑in
                         const $overlay = document.body.lastElementChild;
                         requestAnimationFrame(() => $overlay.style.opacity = '1');
 
-                        // Referencias
                         const $btnCerrar = $overlay.querySelector('.btn-cerrar');
                         const $form = $overlay.querySelector('.register-form');
 
-                        // Cerrar
                         const close = () => {
                             $overlay.style.opacity = '0';
                             setTimeout(() => $overlay.remove(), 200);
@@ -135,22 +131,46 @@
 
                         $btnCerrar.addEventListener('click', close);
                         $overlay.addEventListener('click', e => {
-                            if (e.target === $overlay) close();   // clic en fondo
+                            if (e.target === $overlay) close();
                         });
                         document.addEventListener('keydown', function onKey(e) {
                             if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onKey); }
                         });
 
-                        // Bloquea scroll del body
                         document.body.style.overflow = 'hidden';
 
-                        // Envío del formulario (ejemplo)
-                        $form.addEventListener('submit', e => {
+                        $form.addEventListener('submit', async (e) => {
                             e.preventDefault();
-                            console.log('Enviar datos…');
-                            close();
+                            const datos = Object.fromEntries(new FormData($form));
+
+                            try {
+                                const resp = await fetch("{{ route('clientes.store') }}", {
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                                        'Accept': 'application/json'
+                                    },
+                                    body: new FormData($form),   // usa directamente FormData
+                                });
+
+                                if (!resp.ok) {
+                                    const err = await resp.json();
+                                    throw new Error(err.message ?? 'Error al registrar');
+                                }
+
+                                const json = await resp.json();
+                                console.log(json.message);
+
+                                close();
+                                location.reload()
+
+                            } catch (err) {
+                                alert(err.message);
+                            }
                         });
                     });
+
+
                 });
             </script>
         @endpush

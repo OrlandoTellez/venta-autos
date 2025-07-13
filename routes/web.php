@@ -17,7 +17,9 @@ use App\Http\Controllers\PerfilController;
 Route::get('/', [DashboardController::class, 'index'])->name('pages.dashboard.index');
 
 Route::resource('clientes', ClienteController::class);
-Route::delete('/clientes/delete/{nombre}', [ClienteController::class, 'destroy'])->name('user.delete');
+route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
+
+Route::delete('/clientes/{cliente}', [ClienteController::class, 'destroy'])->name('user.delete');
 
 Route::resource('coches', CocheController::class);
 Route::delete('/coches/delete/{matricula}', [CocheController::class, 'destroy'])->name('coches.delete');
