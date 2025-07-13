@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Compra extends Model
 {
- use HasFactory;
+    use HasFactory;
 
     protected $table = 'compras';
 
@@ -17,7 +17,7 @@ class Compra extends Model
         'fecha',
     ];
 
-     protected $casts    = ['fecha' => 'date'];
+    protected $casts = ['fecha' => 'date'];
 
 
     public function cliente()

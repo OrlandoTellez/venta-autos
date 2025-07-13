@@ -18,7 +18,8 @@ return new class extends Migration {
             $table->boolean('cambio_frenos')->default(false);
             $table->text('otros')->nullable();
             $table->timestamps();
-
+            $table->date('fecha')->after('otros');
+            $table->decimal('costo', 10, 2)->default(0)->after('fecha');
             $table->foreign('coche_id')->references('id')->on('coches')->cascadeOnDelete();
         });
     }

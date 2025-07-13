@@ -5,8 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CocheController;
 use App\Http\Controllers\CompraController;
-use App\Http\Controllers\RevisionesController;
-use App\Http\Controllers\AgenciasController;
+use App\Http\Controllers\RevisionController;
+use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -31,9 +31,18 @@ Route::delete('/compras/{compra}', [CompraController::class, 'destroy'])->name('
 
 
 
-Route::resource('revisiones', RevisionesController::class);
-Route::resource('agencias', AgenciasController::class);
+Route::resource('revisiones', RevisionController::class)
+     ->only(['index','store','destroy']);
+
+Route::resource('agencias', AgenciaController::class);
+Route::post('/agencias', [AgenciaController::class, 'store'])->name('agencias.store');
+Route::delete('/agencias/{agencia}', [AgenciaController::class, 'destroy'])->name('agencia.delete');
+
+
 Route::resource('proveedores', ProveedoresController::class);
+Route::post('/proveedores', [ProveedoresController::class, 'store'])->name('proveedores.store');
+Route::delete('/proveedores/{proveedor}', [ProveedoresController::class, 'destroy'])->name('proveedor.delete');
+
 
 Route::resource('/login', controller: LoginController::class);
 Route::resource('/registro', controller: RegisterController::class);

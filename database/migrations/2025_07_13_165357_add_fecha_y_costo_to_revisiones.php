@@ -10,13 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('agencias', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('rfc')->unique();
-            $table->string('direccion');
-            $table->string('telefono');
-            $table->timestamps();
+        Schema::table('revisiones', function (Blueprint $table) {
+            $table->date('fecha')->after('otros');
+            $table->decimal('costo', 10, 2)->default(0)->after('fecha');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('agencias');
+        Schema::table('revisiones', function (Blueprint $table) {
+            $table->dropColumn(['fecha', 'costo']);
+        });
     }
 };
