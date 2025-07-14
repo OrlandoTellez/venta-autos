@@ -1,31 +1,55 @@
-<form class="Box" action="">
 
+<form class="Box" id="login-form">
     <label class="title">
         <h1>Inicia Sesión</h1>
         <h2>Ingresa a tu cuenta del Sistema de Gestión Automotriz</h2>
     </label>
 
-    <label class="Form_Title">
-        Email
-    </label>
+    <label class="Form_Title">Email</label>
     <div class="Form_Input">
-        <input type="text" placeholder="tu@gmail.com" required="required">
+        <input name="email" type="email" placeholder="tu@gmail.com" required>
     </div>
-    <label class="Form_Title">
-        Contraseña
-    </label>
-    <div class="Form_Input">
-        <input type="password" placeholder="Tu Contraseña" required="required">
-    </div>
-    <button>
-        Iniciar Sesión
-    </button>
 
-    <h2>
-        ¿No tienes una cuenta? <a href="index_registro.html">Regístrate aquí</a>
-    </h2>
+    <label class="Form_Title">Contraseña</label>
+    <div class="Form_Input">
+        <input name="password" type="password" placeholder="Tu contraseña" required>
+    </div>
+
+    <button type="submit">Iniciar Sesión</button>
+
+    <h2>¿No tienes una cuenta? <a href="{{ route('registro.form') }}">Regístrate aquí</a></h2>
 </form>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('login-form');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        try {
+            const resp = await fetch("{{ route('login.store') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json'
+                },
+                body: new FormData(form)
+            });
+
+            if (!resp.ok) {
+                const error = await resp.json();
+                throw new Error(error.message);
+            }
+
+            // éxito
+            window.location.href = "{{ url('/') }}";   //  redirige al dashboard
+        } catch (err) {
+            alert(err.message);
+        }
+    });
+});
+</script>
 <style>
     .Box {
         background-color: #fff;

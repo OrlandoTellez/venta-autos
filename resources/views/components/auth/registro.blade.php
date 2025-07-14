@@ -1,4 +1,6 @@
-<form>
+<form class="register-form" action="{{ route('registro.store') }}" method="POST">
+    @csrf
+
     <label for="">
         <h2>Crear Cuenta</h2>
         <p class="subtitle">Regístrate en el Sistema de Gestión Automotriz</p>
@@ -6,24 +8,24 @@
     <div class="row">
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Tu nombre" required>
+            <input name="nombre" type="text" id="nombre" placeholder="Tu nombre" required>
         </div>
         <div class="form-group">
             <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" placeholder="Tu apellido" required>
+            <input name="apellido" type="text" id="apellido" placeholder="Tu apellido" required>
         </div>
     </div>
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="tu@email.com" required>
+        <input name="email" type="email" id="email" placeholder="tu@email.com" required>
     </div>
     <div class="form-group">
         <label for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" placeholder="Tu teléfono" required>
+        <input name="telefono" type="tel" id="telefono" placeholder="Tu teléfono" required>
     </div>
     <div class="form-group">
         <label for="contrasena">Contraseña</label>
-        <input type="password" id="contrasena" placeholder="Mínimo 6 caracteres" required>
+        <input name="password" type="password" id="contrasena" placeholder="Mínimo 6 caracteres" required>
     </div>
     <div class="form-group">
         <label for="confirmar">Confirmar Contraseña</label>
@@ -32,6 +34,46 @@
     <button type="submit">Crear Cuenta</button>
 </form>
 <p class="login-link">¿Ya tienes una cuenta? <a href="#">Inicia sesión aquí</a></p>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const $form = document.querySelector('.register-form');
+
+        document.body.style.overflow = 'hidden';
+
+        $form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const datos = Object.fromEntries(new FormData($form));
+
+            try {
+                const resp = await fetch("{{ route('registro.store') }}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json'
+                    },
+                    body: new FormData($form),   // usa directamente FormData
+                });
+
+                if (!resp.ok) {
+                    const err = await resp.json();
+                    throw new Error(err.message ?? 'Error al registrar');
+                }
+
+                const json = await resp.json();
+                console.log(json.message);
+
+                close();
+                window.location.href = '/login'
+
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+    });
+
+
+</script>
 
 <style>
     .form-container {

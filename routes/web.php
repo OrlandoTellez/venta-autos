@@ -44,6 +44,12 @@ Route::post('/proveedores', [ProveedoresController::class, 'store'])->name('prov
 Route::delete('/proveedores/{proveedor}', [ProveedoresController::class, 'destroy'])->name('proveedor.delete');
 
 
-Route::resource('/login', controller: LoginController::class);
-Route::resource('/registro', controller: RegisterController::class);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login.form');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+
+
+Route::get('/registro', [RegisterController::class, 'index'])->name('registro.form');
+Route::post('/registro', [RegisterController::class, 'store'])->name('registro.store');
+
 Route::resource('/perfil', controller: PerfilController::class);

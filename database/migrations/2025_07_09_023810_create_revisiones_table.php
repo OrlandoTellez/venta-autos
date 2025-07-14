@@ -12,15 +12,24 @@ return new class extends Migration {
     {
         Schema::create('revisiones', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('coche_id');
+
             $table->boolean('cambio_filtro')->default(false);
             $table->boolean('cambio_aceite')->default(false);
             $table->boolean('cambio_frenos')->default(false);
             $table->text('otros')->nullable();
+
+            //  ↓ Campos nuevos, sin AFTER
+            $table->date('fecha');
+            $table->decimal('costo', 10, 2)->default(0);
+
             $table->timestamps();
-            $table->date('fecha')->after('otros');
-            $table->decimal('costo', 10, 2)->default(0)->after('fecha');
-            $table->foreign('coche_id')->references('id')->on('coches')->cascadeOnDelete();
+
+            $table->foreign('coche_id')
+                ->references('id')
+                ->on('coches')
+                ->cascadeOnDelete();
         });
     }
 
