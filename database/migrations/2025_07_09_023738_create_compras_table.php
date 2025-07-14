@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('coche_id');
             $table->date('fecha');
 
-            $table->foreign('cliente_id')->references('id')->on('clientes')->cascadeOnDelete('');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->cascadeOnDelete();
             $table->timestamps();
         });
     }

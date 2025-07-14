@@ -38,7 +38,6 @@
                             <th>Modelo</th>
                             <th>Color</th>
                             <th>Precio C$</th>
-                            <th>Cliente</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
@@ -55,8 +54,7 @@
                                 <td>{{ $coche->modelo }}</td>
                                 <td>{{ $coche->color }}</td>
                                 <td>{{ $coche->precio }}</td>
-                                <td>{{ $coche->cliente }}</td>
-                                <td>{{ $coche->estado }}</td>
+                                <td>Nuevo</td>
                                 <td>
                                     <form 
                                     action="{{ route('coche.delete', ['coche' => $coche->id]) }}"

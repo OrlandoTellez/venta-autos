@@ -18,8 +18,8 @@
 
                 <x-tarjeta-total titulo="Total de clientes" valor="{{ count($users) }}" icono="clientes" />
 
-                <x-tarjeta-total titulo="Total de clientes" valor="{{ count($users) }}" icono="clientes" />
-                <x-tarjeta-total titulo="Total de clientes" valor="{{ count($users) }}" icono="clientes" />
+                <x-tarjeta-total titulo="Nuevos este mes" valor="3" icono="clientes" />
+                <x-tarjeta-total titulo="Clientes activos" valor="6" icono="clientes" />
 
             </div>
         </article>
